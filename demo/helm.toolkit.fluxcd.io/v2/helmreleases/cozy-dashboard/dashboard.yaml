@@ -1,0 +1,37 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  labels:
+    cozystack.io/package: cozystack.cozystack-engine
+  name: dashboard
+  namespace: cozy-dashboard
+spec:
+  chartRef:
+    kind: ExternalArtifact
+    name: cozystack-cozystack-engine-default-dashboard
+    namespace: cozy-system
+  dependsOn:
+  - name: cozystack-api
+    namespace: cozy-system
+  - name: cozystack-controller
+    namespace: cozy-system
+  - name: application-definition-crd
+    namespace: cozy-system
+  - name: cilium
+    namespace: cozy-cilium
+  - name: cilium-networkpolicy
+    namespace: cozy-cilium
+  - name: kubeovn
+    namespace: cozy-kubeovn
+  install:
+    remediation:
+      retries: -1
+    timeout: 10m0s
+  interval: 5m0s
+  upgrade:
+    remediation:
+      retries: -1
+    timeout: 10m0s
+  valuesFrom:
+  - kind: Secret
+    name: cozystack-values
