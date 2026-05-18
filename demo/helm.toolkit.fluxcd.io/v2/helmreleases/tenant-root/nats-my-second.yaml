@@ -25,7 +25,8 @@ spec:
     jetstream:
       enabled: true
       size: 10Gi
-    replicas: 2
+    replicas: 3
+    resources: {}
     resourcesPreset: nano
     storageClass: local
   valuesFrom:
