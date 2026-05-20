@@ -1,0 +1,55 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  labels:
+    apps.cozystack.io/application.group: apps.cozystack.io
+    apps.cozystack.io/application.kind: MongoDB
+    apps.cozystack.io/application.name: first-mongo
+    sharding.fluxcd.io/key: tenants
+  name: mongodb-first-mongo
+  namespace: tenant-root
+spec:
+  chartRef:
+    kind: ExternalArtifact
+    name: cozystack-mongodb-application-default-mongodb
+    namespace: cozy-system
+  install:
+    remediation:
+      retries: -1
+  interval: 5m0s
+  upgrade:
+    remediation:
+      retries: -1
+  values:
+    backup:
+      destinationPath: s3://bucket/path/to/folder/
+      enabled: false
+      endpointURL: http://minio-gateway-service:9000
+      retentionPolicy: 30d
+      s3AccessKey: ""
+      s3SecretKey: ""
+      schedule: 0 2 * * *
+    bootstrap:
+      backupName: ""
+      enabled: false
+      recoveryTime: ""
+    external: false
+    replicas: 1
+    resourcesPreset: t1.small
+    sharding: false
+    shardingConfig:
+      configServerSize: 3Gi
+      configServers: 3
+      mongos: 2
+      shards:
+      - name: rs0
+        replicas: 3
+        size: 10Gi
+    size: 1Gi
+    storageClass: local
+    users:
+      simon: {}
+    version: v8
+  valuesFrom:
+  - kind: Secret
+    name: cozystack-values
