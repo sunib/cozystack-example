@@ -21,16 +21,20 @@ spec:
     remediation:
       retries: -1
   values:
+    config:
+      merge: {}
+      resolver: {}
     external: false
     jetstream:
       enabled: true
       size: 1Gi
     replicas: 2
+    resources: {}
     resourcesPreset: t1.nano
     storageClass: local
     users:
       simon:
-        password: simon
+        password: simon2
   valuesFrom:
   - kind: Secret
     name: cozystack-values
