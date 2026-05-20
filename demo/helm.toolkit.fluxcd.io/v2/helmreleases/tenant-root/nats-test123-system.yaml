@@ -45,6 +45,8 @@ spec:
           accounts:
             A:
               users:
+              - password: "123"
+                user: 23sdf
               - password: s1
                 user: s
         monitor:
