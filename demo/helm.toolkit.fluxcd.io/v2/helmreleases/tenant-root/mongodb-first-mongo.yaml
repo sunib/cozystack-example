@@ -38,7 +38,8 @@ spec:
         roles:
           admin:
           - simon
-          readonly: []
+          readonly:
+          - simon2
     external: false
     replicas: 1
     resources: {}
@@ -57,6 +58,8 @@ spec:
     users:
       simon:
         password: blaaaaaat
+      simon2:
+        password: blaaaaaaaat2
     version: v8
   valuesFrom:
   - kind: Secret
