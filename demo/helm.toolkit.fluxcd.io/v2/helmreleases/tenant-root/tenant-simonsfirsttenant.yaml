@@ -25,7 +25,8 @@ spec:
     host: ""
     ingress: false
     monitoring: false
-    resourceQuotas: {}
+    resourceQuotas:
+      customkey: customvalue
     schedulingClass: ""
     seaweedfs: false
   valuesFrom:
