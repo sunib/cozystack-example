@@ -5,31 +5,31 @@ metadata:
     meta.helm.sh/release-name: tenant-root
     meta.helm.sh/release-namespace: tenant-root
   labels:
+    app.kubernetes.io/instance: tenant-root
+    app.kubernetes.io/managed-by: Helm
     apps.cozystack.io/application.group: apps.cozystack.io
-    apps.cozystack.io/application.kind: Ingress
-    apps.cozystack.io/application.name: ingress
+    apps.cozystack.io/application.kind: Monitoring
+    apps.cozystack.io/application.name: monitoring
+    helm.toolkit.fluxcd.io/name: tenant-root
+    helm.toolkit.fluxcd.io/namespace: tenant-root
     internal.cozystack.io/tenantmodule: "true"
     sharding.fluxcd.io/key: tenants
-  name: ingress
+  name: monitoring
   namespace: tenant-root
 spec:
   chartRef:
     kind: ExternalArtifact
-    name: cozystack-ingress-application-default-ingress
+    name: cozystack-monitoring-application-default-monitoring
     namespace: cozy-system
   install:
     remediation:
       retries: -1
-  interval: 5m0s
+  interval: 5m
+  timeout: 10m
   upgrade:
+    force: true
     remediation:
       retries: -1
-  values:
-    cloudflareProxy: false
-    replicas: 3
-    resources: {}
-    resourcesPreset: t1.micro
-    whitelist: []
   valuesFrom:
   - kind: Secret
     name: cozystack-values
