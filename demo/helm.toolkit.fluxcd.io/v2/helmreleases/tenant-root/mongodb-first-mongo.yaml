@@ -33,7 +33,12 @@ spec:
       backupName: ""
       enabled: false
       recoveryTime: ""
-    databases: {}
+    databases:
+      whoot:
+        roles:
+          admin:
+          - simon
+          readonly: []
     external: false
     replicas: 1
     resources: {}
