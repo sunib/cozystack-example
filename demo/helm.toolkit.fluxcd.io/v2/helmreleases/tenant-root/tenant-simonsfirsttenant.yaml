@@ -1,8 +1,6 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  annotations:
-    apps.cozystack.io-reverse-cozystack.test/audit-nudge: "2026-05-20T22:15:57+02:00"
   labels:
     apps.cozystack.io/application.group: apps.cozystack.io
     apps.cozystack.io/application.kind: Tenant
