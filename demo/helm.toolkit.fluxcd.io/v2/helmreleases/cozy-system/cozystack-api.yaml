@@ -8,7 +8,7 @@ metadata:
 spec:
   chartRef:
     kind: ExternalArtifact
-    name: cozystack-cozystack-engine-default-cozystack-api
+    name: cozystack-cozystack-engine-oidc-cozystack-api
     namespace: cozy-system
   dependsOn:
   - name: cozystack-controller
@@ -21,6 +21,10 @@ spec:
     namespace: cozy-cilium
   - name: kubeovn
     namespace: cozy-kubeovn
+  - name: keycloak
+    namespace: cozy-keycloak
+  - name: keycloak-operator
+    namespace: cozy-keycloak
   install:
     strategy:
       name: RetryOnFailure

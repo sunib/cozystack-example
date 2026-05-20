@@ -25,6 +25,11 @@ spec:
       retryInterval: 30s
     timeout: 10m0s
   values:
+    authentication:
+      oidc:
+        enabled: true
+        insecureSkipVerify: false
+        keycloakInternalUrl: http://keycloak-http.cozy-keycloak.svc:8080/realms/cozy
     bundles:
       iaas:
         enabled: false

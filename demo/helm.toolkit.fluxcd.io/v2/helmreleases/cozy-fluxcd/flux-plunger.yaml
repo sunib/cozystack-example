@@ -27,6 +27,8 @@ spec:
     namespace: cozy-system
   - name: dashboard
     namespace: cozy-dashboard
+  - name: keycloak-configure
+    namespace: cozy-keycloak
   install:
     strategy:
       name: RetryOnFailure
