@@ -1,0 +1,111 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  annotations:
+    meta.helm.sh/release-name: monitoring
+    meta.helm.sh/release-namespace: tenant-root
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    helm.toolkit.fluxcd.io/name: monitoring
+    helm.toolkit.fluxcd.io/namespace: tenant-root
+    sharding.fluxcd.io/key: tenants
+  name: monitoring-system
+  namespace: tenant-root
+spec:
+  chartRef:
+    kind: ExternalArtifact
+    name: cozystack-monitoring-application-default-monitoring-system
+    namespace: cozy-system
+  install:
+    remediation:
+      retries: -1
+  interval: 5m
+  timeout: 10m
+  upgrade:
+    force: true
+    remediation:
+      retries: -1
+  values:
+    _cluster:
+      api-server-endpoint: https://cozy.z65:6443
+      bundle-name: isp-full
+      cluster-domain: cozy.local
+      cpu-allocation-ratio: "10"
+      ephemeral-storage-allocation-ratio: "40"
+      expose-external-ips: ""
+      expose-ingress: tenant-root
+      expose-services: dashboard,api
+      extra-keycloak-redirect-uri-for-dashboard: ""
+      issuer-name: letsencrypt-prod
+      keycloak-internal-url: http://keycloak-http.cozy-keycloak.svc:8080/realms/cozy
+      kube-root-ca: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJpVENDQVRDZ0F3SUJBZ0lSQUpMQWpjajZTSG1uVEVDVUlwMDJLQlF3Q2dZSUtvWkl6ajBFQXdJd0ZURVQKTUJFR0ExVUVDaE1LYTNWaVpYSnVaWFJsY3pBZUZ3MHlOakEwTURNd05UVTJNVE5hRncwek5qQXpNekV3TlRVMgpNVE5hTUJVeEV6QVJCZ05WQkFvVENtdDFZbVZ5Ym1WMFpYTXdXVEFUQmdjcWhrak9QUUlCQmdncWhrak9QUU1CCkJ3TkNBQVI2YTRHK0ZJY1R4UjFnS0pZOEJndjl4OS9WUVpuMGp0aXJEeEhqdkU5UWdoaDRWQkl6bnpDSmhueEEKR3gzbk9FMjNGT2xQRHgrWkxucWQ0SEptZmdQVm8yRXdYekFPQmdOVkhROEJBZjhFQkFNQ0FvUXdIUVlEVlIwbApCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0dBUVVGQndNQ01BOEdBMVVkRXdFQi93UUZNQU1CQWY4d0hRWURWUjBPCkJCWUVGTWxnK2NUK3RsaGJ5SmQ4U0k5bW42MXlib3FvTUFvR0NDcUdTTTQ5QkFNQ0EwY0FNRVFDSUJHZFRQd3gKTU83WU92NDliQXU5dVRSTDJtUitWNFFDcnprV2FZaEh2eEFWQWlCRC96RVk3dGpPNCtHUzNsRGRoSUJxYkx0NQo1bFhXVTBGRmxmbWl3UkhZNXc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+      memory-allocation-ratio: "1"
+      oidc-enabled: "true"
+      oidc-insecure-skip-verify: "false"
+      root-host: cozy.z65.nl
+      scheduling:
+        globalAppTopologySpreadConstraints: ""
+      solver: dns01
+    _namespace:
+      etcd: tenant-root
+      host: cozy.z65.nl
+      ingress: tenant-root
+      monitoring: tenant-root
+      seaweedfs: tenant-root
+    alerta:
+      alerts:
+        slack:
+          disabledSeverity: []
+          url: ""
+        telegram:
+          chatID: ""
+          disabledSeverity: []
+          token: ""
+      resources:
+        limits:
+          cpu: "1"
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      storage: 10Gi
+      storageClassName: ""
+    cozy-lib:
+      global: {}
+    grafana:
+      db:
+        size: 10Gi
+      resources:
+        limits:
+          cpu: "1"
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+    host: ""
+    logsStorages:
+    - name: generic
+      retentionPeriod: "1"
+      storage: 10Gi
+      storageClassName: replicated
+    metricsStorages:
+    - deduplicationInterval: 15s
+      name: shortterm
+      retentionPeriod: 3d
+      storage: 10Gi
+      storageClassName: ""
+    - deduplicationInterval: 5m
+      name: longterm
+      retentionPeriod: 14d
+      storage: 10Gi
+      storageClassName: ""
+    vmagent:
+      externalLabels:
+        cluster: cozystack
+      remoteWrite:
+        urls:
+        - http://vminsert-shortterm:8480/insert/0/prometheus
+        - http://vminsert-longterm:8480/insert/0/prometheus
+  valuesFrom:
+  - kind: Secret
+    name: cozystack-values
