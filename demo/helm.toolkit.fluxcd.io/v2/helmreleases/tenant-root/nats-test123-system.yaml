@@ -41,6 +41,12 @@ spec:
               enabled: true
               size: 1Gi
               storageClassName: local
+        merge:
+          accounts:
+            A:
+              users:
+              - password: s
+                user: s
         monitor:
           enabled: true
       container:
