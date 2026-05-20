@@ -45,7 +45,7 @@ spec:
           accounts:
             A:
               users:
-              - password: simon
+              - password: simon2
                 user: simon
         monitor:
           enabled: true
