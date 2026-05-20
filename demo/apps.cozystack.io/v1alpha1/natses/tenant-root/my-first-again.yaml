@@ -17,4 +17,4 @@ spec:
   storageClass: local
   users:
     simon:
-      password: simon2
+      password: simon23
