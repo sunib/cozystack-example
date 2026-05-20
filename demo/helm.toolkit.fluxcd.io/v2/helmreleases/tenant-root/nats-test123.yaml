@@ -33,6 +33,8 @@ spec:
     resourcesPreset: t1.nano
     storageClass: local
     users:
+      23sdf:
+        password: "123"
       s:
         password: s1
   valuesFrom:
