@@ -1,0 +1,54 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  annotations:
+    meta.helm.sh/release-name: ingress
+    meta.helm.sh/release-namespace: tenant-root
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    helm.toolkit.fluxcd.io/name: ingress
+    helm.toolkit.fluxcd.io/namespace: tenant-root
+    sharding.fluxcd.io/key: tenants
+  name: ingress-nginx-system
+  namespace: tenant-root
+spec:
+  chartRef:
+    kind: ExternalArtifact
+    name: cozystack-ingress-application-default-ingress-system
+    namespace: cozy-system
+  install:
+    remediation:
+      retries: -1
+  interval: 5m
+  timeout: 10m
+  upgrade:
+    force: true
+    remediation:
+      retries: -1
+  values:
+    ingress-nginx:
+      controller:
+        ingressClass: tenant-root
+        ingressClassResource:
+          controllerValue: k8s.io/ingress-nginx-tenant-root
+          name: tenant-root
+        podLabels:
+          cozystack.io/service: ingress
+          policy.cozystack.io/allow-to-apiserver: "true"
+        replicaCount: 3
+        resources:
+          limits:
+            cpu: 500m
+            ephemeral-storage: 2Gi
+            memory: 256Mi
+          requests:
+            cpu: "0.05"
+            ephemeral-storage: "53687091"
+            memory: "268435456"
+        service:
+          externalTrafficPolicy: Local
+          type: LoadBalancer
+      fullnameOverride: root-ingress
+  valuesFrom:
+  - kind: Secret
+    name: cozystack-values
