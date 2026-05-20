@@ -1,0 +1,44 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  labels:
+    cozystack.io/package: cozystack.flux-plunger
+  name: flux-plunger
+  namespace: cozy-fluxcd
+spec:
+  chartRef:
+    kind: ExternalArtifact
+    name: cozystack-flux-plunger-default-flux-plunger
+    namespace: cozy-system
+  dependsOn:
+  - name: cert-manager-crds
+    namespace: cozy-cert-manager
+  - name: cert-manager
+    namespace: cozy-cert-manager
+  - name: cert-manager-issuers
+    namespace: cozy-cert-manager
+  - name: application-definition-crd
+    namespace: cozy-system
+  - name: cozystack-controller
+    namespace: cozy-system
+  - name: cozystack-api
+    namespace: cozy-system
+  - name: lineage-controller-webhook
+    namespace: cozy-system
+  - name: dashboard
+    namespace: cozy-dashboard
+  install:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  interval: 5m0s
+  maxHistory: 5
+  upgrade:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  valuesFrom:
+  - kind: Secret
+    name: cozystack-values
