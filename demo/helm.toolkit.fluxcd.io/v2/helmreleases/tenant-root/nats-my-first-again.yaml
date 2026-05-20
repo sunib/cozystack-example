@@ -34,7 +34,7 @@ spec:
     storageClass: local
     users:
       simon:
-        password: simon23
+        password: simon234
   valuesFrom:
   - kind: Secret
     name: cozystack-values
