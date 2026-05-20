@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   annotations:
-    reconcile.fluxcd.io/requestedAt: "1779313900"
+    reconcile.fluxcd.io/requestedAt: "1779314134"
   labels:
     cozystack.io/package: cozystack.cozystack-engine
   name: dashboard
