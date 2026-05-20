@@ -1,0 +1,18 @@
+apiVersion: apps.cozystack.io/v1alpha1
+kind: NATS
+metadata:
+  name: andmore2
+  namespace: tenant-root
+spec:
+  config:
+    merge: {}
+    resolver: {}
+  external: false
+  jetstream:
+    enabled: true
+    size: 1Gi
+  replicas: 2
+  resources: {}
+  resourcesPreset: t1.nano
+  storageClass: local
+  users: {}
