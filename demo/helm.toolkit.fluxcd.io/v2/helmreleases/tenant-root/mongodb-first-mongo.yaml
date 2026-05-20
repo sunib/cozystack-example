@@ -33,8 +33,10 @@ spec:
       backupName: ""
       enabled: false
       recoveryTime: ""
+    databases: {}
     external: false
     replicas: 1
+    resources: {}
     resourcesPreset: t1.small
     sharding: false
     shardingConfig:
@@ -48,7 +50,8 @@ spec:
     size: 1Gi
     storageClass: local
     users:
-      simon: {}
+      simon:
+        password: blaaaaaat
     version: v8
   valuesFrom:
   - kind: Secret
