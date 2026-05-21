@@ -1,0 +1,48 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  annotations:
+    reconcile.fluxcd.io/requestedAt: "1779314134"
+  labels:
+    cozystack.io/package: cozystack.cozystack-engine
+  name: dashboard
+  namespace: cozy-dashboard
+spec:
+  chartRef:
+    kind: ExternalArtifact
+    name: cozystack-cozystack-engine-oidc-dashboard
+    namespace: cozy-system
+  dependsOn:
+  - name: cozystack-api
+    namespace: cozy-system
+  - name: cozystack-controller
+    namespace: cozy-system
+  - name: keycloak-configure
+    namespace: cozy-keycloak
+  - name: application-definition-crd
+    namespace: cozy-system
+  - name: cilium
+    namespace: cozy-cilium
+  - name: cilium-networkpolicy
+    namespace: cozy-cilium
+  - name: kubeovn
+    namespace: cozy-kubeovn
+  - name: keycloak
+    namespace: cozy-keycloak
+  - name: keycloak-operator
+    namespace: cozy-keycloak
+  install:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  interval: 5m0s
+  maxHistory: 5
+  upgrade:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  valuesFrom:
+  - kind: Secret
+    name: cozystack-values

@@ -1,0 +1,47 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  labels:
+    cozystack.io/package: cozystack.linstor
+    cozystack.io/privileged: "true"
+  name: piraeus-operator-crds
+  namespace: cozy-linstor
+spec:
+  chartRef:
+    kind: ExternalArtifact
+    name: cozystack-linstor-default-piraeus-operator-crds
+    namespace: cozy-system
+  dependsOn:
+  - name: cilium
+    namespace: cozy-cilium
+  - name: cilium-networkpolicy
+    namespace: cozy-cilium
+  - name: kubeovn
+    namespace: cozy-kubeovn
+  - name: cert-manager-crds
+    namespace: cozy-cert-manager
+  - name: cert-manager
+    namespace: cozy-cert-manager
+  - name: cert-manager-issuers
+    namespace: cozy-cert-manager
+  - name: victoria-metrics-operator
+    namespace: cozy-victoria-metrics-operator
+  - name: reloader
+    namespace: cozy-reloader
+  - name: snapshot-controller
+    namespace: cozy-snapshot-controller
+  install:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  interval: 5m0s
+  maxHistory: 5
+  upgrade:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  valuesFrom:
+  - kind: Secret
+    name: cozystack-values
