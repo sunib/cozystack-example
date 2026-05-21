@@ -1,0 +1,36 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  labels:
+    cozystack.io/package: cozystack.foundationdb-application
+  name: foundationdb-rd
+  namespace: cozy-system
+spec:
+  chartRef:
+    kind: ExternalArtifact
+    name: cozystack-foundationdb-application-default-foundationdb-rd
+    namespace: cozy-system
+  dependsOn:
+  - name: cilium
+    namespace: cozy-cilium
+  - name: cilium-networkpolicy
+    namespace: cozy-cilium
+  - name: kubeovn
+    namespace: cozy-kubeovn
+  - name: foundationdb-operator
+    namespace: cozy-foundationdb-operator
+  install:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  interval: 5m0s
+  maxHistory: 5
+  upgrade:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  valuesFrom:
+  - kind: Secret
+    name: cozystack-values
