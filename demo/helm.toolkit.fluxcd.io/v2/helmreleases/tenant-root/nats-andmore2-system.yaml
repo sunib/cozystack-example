@@ -30,7 +30,7 @@ spec:
       config:
         cluster:
           enabled: true
-          replicas: 1
+          replicas: 2
           routeURLs:
             k8sClusterDomain: cozy.local
         jetstream:
