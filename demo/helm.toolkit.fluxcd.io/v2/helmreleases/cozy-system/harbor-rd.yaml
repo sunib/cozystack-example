@@ -1,40 +1,9 @@
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
+apiVersion: v1
+kind: Status
 metadata:
-  labels:
-    cozystack.io/package: cozystack.harbor-application
   name: harbor-rd
   namespace: cozy-system
-spec:
-  chartRef:
-    kind: ExternalArtifact
-    name: cozystack-harbor-application-default-harbor-rd
-    namespace: cozy-system
-  dependsOn:
-  - name: cilium
-    namespace: cozy-cilium
-  - name: cilium-networkpolicy
-    namespace: cozy-cilium
-  - name: kubeovn
-    namespace: cozy-kubeovn
-  - name: postgres-operator
-    namespace: cozy-postgres-operator
-  - name: redis-operator
-    namespace: cozy-redis-operator
-  - name: objectstorage-controller
-    namespace: cozy-objectstorage-controller
-  install:
-    strategy:
-      name: RetryOnFailure
-      retryInterval: 30s
-    timeout: 10m0s
-  interval: 5m0s
-  maxHistory: 5
-  upgrade:
-    strategy:
-      name: RetryOnFailure
-      retryInterval: 30s
-    timeout: 10m0s
-  valuesFrom:
-  - kind: Secret
-    name: cozystack-values
+message: 'Operation cannot be fulfilled on helmreleases.helm.toolkit.fluxcd.io "harbor-rd":
+  the object has been modified; please apply your changes to the latest version and
+  try again'
+reason: Conflict
