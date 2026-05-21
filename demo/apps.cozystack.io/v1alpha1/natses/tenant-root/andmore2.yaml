@@ -11,7 +11,7 @@ spec:
   jetstream:
     enabled: true
     size: 1Gi
-  replicas: 1
+  replicas: 2
   resources: {}
   resourcesPreset: t1.nano
   storageClass: local
