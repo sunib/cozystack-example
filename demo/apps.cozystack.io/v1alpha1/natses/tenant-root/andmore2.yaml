@@ -15,4 +15,6 @@ spec:
   resources: {}
   resourcesPreset: t1.nano
   storageClass: local
-  users: {}
+  users:
+    siempie:
+      password: mypassword
