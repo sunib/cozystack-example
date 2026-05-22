@@ -1,0 +1,35 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  labels:
+    cozystack.io/package: cozystack.backupstrategy-controller
+    cozystack.io/privileged: "true"
+  name: backupstrategy-controller
+  namespace: cozy-backup-controller
+spec:
+  chartRef:
+    kind: ExternalArtifact
+    name: cozystack-backupstrategy-controller-default-backupstrategy-controller
+    namespace: cozy-system
+  dependsOn:
+  - name: cilium
+    namespace: cozy-cilium
+  - name: cilium-networkpolicy
+    namespace: cozy-cilium
+  - name: kubeovn
+    namespace: cozy-kubeovn
+  install:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  interval: 5m0s
+  maxHistory: 5
+  upgrade:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  valuesFrom:
+  - kind: Secret
+    name: cozystack-values
