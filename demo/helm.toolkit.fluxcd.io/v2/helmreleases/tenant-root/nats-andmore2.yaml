@@ -1,9 +1,6 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  annotations:
-    apps.cozystack.io-kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"apps.cozystack.io/v1alpha1","kind":"NATS","metadata":{"annotations":{},"name":"andmore2","namespace":"tenant-root"},"spec":{"config":{"merge":{},"resolver":{}},"external":false,"jetstream":{"enabled":true,"size":"1Gi"},"replicas":2,"resources":{},"resourcesPreset":"t1.nano","storageClass":"local","users":{}}}
   labels:
     apps.cozystack.io/application.group: apps.cozystack.io
     apps.cozystack.io/application.kind: NATS
@@ -35,7 +32,9 @@ spec:
     resources: {}
     resourcesPreset: t1.nano
     storageClass: local
-    users: {}
+    users:
+      siempie:
+        password: mypassword
   valuesFrom:
   - kind: Secret
     name: cozystack-values
