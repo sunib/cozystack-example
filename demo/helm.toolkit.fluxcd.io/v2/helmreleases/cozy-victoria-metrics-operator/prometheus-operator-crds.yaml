@@ -1,27 +1,9 @@
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
+apiVersion: v1
+kind: Status
 metadata:
-  labels:
-    cozystack.io/package: cozystack.prometheus-operator-crds
   name: prometheus-operator-crds
   namespace: cozy-victoria-metrics-operator
-spec:
-  chartRef:
-    kind: ExternalArtifact
-    name: cozystack-prometheus-operator-crds-default-prometheus-operator-crds
-    namespace: cozy-system
-  install:
-    strategy:
-      name: RetryOnFailure
-      retryInterval: 30s
-    timeout: 10m0s
-  interval: 5m0s
-  maxHistory: 5
-  upgrade:
-    strategy:
-      name: RetryOnFailure
-      retryInterval: 30s
-    timeout: 10m0s
-  valuesFrom:
-  - kind: Secret
-    name: cozystack-values
+message: 'Operation cannot be fulfilled on helmreleases.helm.toolkit.fluxcd.io "prometheus-operator-crds":
+  the object has been modified; please apply your changes to the latest version and
+  try again'
+reason: Conflict
