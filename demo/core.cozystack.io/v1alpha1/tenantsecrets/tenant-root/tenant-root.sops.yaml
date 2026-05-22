@@ -1,0 +1,38 @@
+apiVersion: core.cozystack.io/v1alpha1
+kind: TenantSecret
+metadata:
+    annotations:
+        kubernetes.io/service-account.name: tenant-root
+        kubernetes.io/service-account.uid: 64addc27-c248-44a6-8860-af025d67de4f
+        meta.helm.sh/release-name: info
+        meta.helm.sh/release-namespace: tenant-root
+    labels:
+        app.kubernetes.io/managed-by: Helm
+        apps.cozystack.io/application.group: apps.cozystack.io
+        apps.cozystack.io/application.kind: Info
+        apps.cozystack.io/application.name: info
+        helm.toolkit.fluxcd.io/name: info
+        helm.toolkit.fluxcd.io/namespace: tenant-root
+        internal.cozystack.io/managed-by-cozystack: "true"
+    name: tenant-root
+    namespace: tenant-root
+data:
+    ca.crt: ENC[AES256_GCM,data:8V/OMAIg7sLrlJcPVkBpYtF2QSczXhmzj+eurkmPBSE2ijNBRGYgVRmM5poQnwExXEgUXu4Fi7yL+hL714X7sxnO/xfAIN+o6rA4QUgHQFG74LzBwOEqsG2s1amOqcxdtCKSHl8VofdgxSgQ2qcxxzG/ajcwHjbBp052tpmRJN/d1dqtpiI2zeq7H7SjqzU1PWikoi2nRY7n5d5pPNG+QyThHvlHawgjwoIzQEzBSGMPEkLdzk9H1KAaxf06z8U2cpccaqfxlEeKs3s8dSx87n0IxVt+Bv8n8Xlp+1yvxNsyIndYTTe34R1OBFQdYkYQKTIEY9mcQ27gqBzf/q18XgKe+hVgZ7Xuga9Y7YPEVDeKpF4ZBIR7QESTMXxds8vp5AhouvTgNU755VDG1p5Yz746pTnPvMcGkNi4RSVI/TFUuvAyDTSfIMmsh0RHJyF+aUkRbCBshtihnlbX5vA3jE5rjbpAxulaE2X1clSGFLaDRo4O6fd/27lZI1ozD6H9tjZDI4FUbjAE3gXsPpYHGbjLOzsbeCecSf0y6Icb/jPafMJz+EUMaXvLtuUyEx2e1cgT+6KxGANDsfsQ1bTm5/bERIaWymZDIxxlDglO3DdnJjjSb6nwX86+FaXII6njeukaqxKShMXB5dg2QLS+Wdkegw4nU/IQV7zutRKXyrimnfwgqNo7HuZvL0i7ICj8+/EZ3AWRiMvwTHVUkmxLKC2YHpRY6yYOgx35EcOu5hWH1u6HMIGEyq8wkPRbdX3w9LhdBX8bVCGabENcTKxrZtB4W1yfwAuGT4GIr+qWEnaVgRkRgF/IQ66M7856U7CChzGZYFPDmJYngMpZHlszNsBvBg6HDji7W1QDG2GDLKEnclx0b6Qbrk+ln0K81ZdcGodRIthnRdh3PSCmLA6fVI2kJTUnyAeDGbhrWCcfsvNj/piCAw9csseCyGxnp9qNdKxT6QfOP97APjVYFpKfuqF54WhgDNHALKiLYW6UueQM0pgE+D41AUbiKiF4PhjTbsKAQ9HIKkI66J5zPcZn4Z0k6SiVaj00insLpA==,iv:lHs5uFh0W5RBQ1c5mF5jy1lhc8GFdaD6DoOSMtxIc9g=,tag:tP7If6yBLywSefYH/rYBow==,type:str]
+    namespace: ENC[AES256_GCM,data:kKhFV2OAV0LNkIOLXzlQeA==,iv:wDNN1myytv0nIOCm0BJayzLZ8THyUqFnjWw97Xyzczk=,tag:z1vCGCAgO/ks2Vwt7ZlXGw==,type:str]
+    token: ENC[AES256_GCM,data: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,iv:UNYJ4hXzZ6u0+mLhYpWgvpfGov0AfnfymAzfLIyA6Ps=,tag:aXv1v/wQe0IVpI79I5Zipw==,type:str]
+type: kubernetes.io/service-account-token
+sops:
+    age:
+        - recipient: age1vrec87smur9jr5m4w8xku9f0av5en0yk7rczqtm54ussw0uu8a8qd58teq
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBwbEFsK1FiWHFYRldkblN4
+            UVJTYzNLUzA2ZWYzS09KdzhPVFowZGRpMEhBCklteXdHelhFUENJS3Z1QTRpL3lk
+            aFJ6TEM2N2hXK1F0VDN5cWFscXBkaE0KLS0tIHN6K1FLazE3TDd4Z21hUmVaNFpz
+            Um5OV24raFlqbjl6d3hneXZtRXNRQ1EKZ2bn9lZlKgYNQynwN1dSMzKAGsjtefu9
+            nep5YadqDbSWNYJRoN4mVZ3m8xRmErr13BDoXsvKUXJN+ztp7l+amA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-05-22T20:17:07Z"
+    mac: ENC[AES256_GCM,data:9uH7OZx02WvwpOhNHm8SzIDiPDhBygPVfJZ6zFp5JrOee96jDuubze6jH52jrMu4FHNeF0KyzBIK9Dv6SDApgL2WI3+Y6W6JNB9zzDfUT5BNEJXoaOkEzHqfkmyGMdpGGUqabm1jqlTCEwZPlu32NgwtELYOPSGAxwGZgWqgvW4=,iv:s9LnOgRUkyZhfgeWyf/6usfTcvzea8FqdvY93nm9ers=,tag:n2fDTHVncA2JdGgcBZie/w==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0
