@@ -1,0 +1,40 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  labels:
+    apps.cozystack.io/application.group: apps.cozystack.io
+    apps.cozystack.io/application.kind: NATS
+    apps.cozystack.io/application.name: my-first-again
+    sharding.fluxcd.io/key: tenants
+  name: nats-my-first-again
+  namespace: tenant-root
+spec:
+  chartRef:
+    kind: ExternalArtifact
+    name: cozystack-nats-application-default-nats
+    namespace: cozy-system
+  install:
+    remediation:
+      retries: -1
+  interval: 5m0s
+  upgrade:
+    remediation:
+      retries: -1
+  values:
+    config:
+      merge: {}
+      resolver: {}
+    external: false
+    jetstream:
+      enabled: true
+      size: 1Gi
+    replicas: 2
+    resources: {}
+    resourcesPreset: t1.nano
+    storageClass: local
+    users:
+      simon:
+        password: simon234
+  valuesFrom:
+  - kind: Secret
+    name: cozystack-values

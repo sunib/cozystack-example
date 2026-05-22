@@ -1,0 +1,17 @@
+apiVersion: core.cozystack.io/v1alpha1
+kind: TenantModule
+metadata:
+  annotations:
+    meta.helm.sh/release-name: tenant-simonsfirsttenant
+    meta.helm.sh/release-namespace: tenant-root
+  labels:
+    app.kubernetes.io/instance: tenant-simonsfirsttenant
+    app.kubernetes.io/managed-by: Helm
+    apps.cozystack.io/application.group: apps.cozystack.io
+    apps.cozystack.io/application.kind: Info
+    apps.cozystack.io/application.name: info
+    helm.toolkit.fluxcd.io/name: tenant-simonsfirsttenant
+    helm.toolkit.fluxcd.io/namespace: tenant-root
+    sharding.fluxcd.io/key: tenants
+  name: info
+  namespace: tenant-simonsfirsttenant

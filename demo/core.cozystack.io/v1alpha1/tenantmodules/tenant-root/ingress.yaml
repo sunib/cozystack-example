@@ -1,0 +1,13 @@
+apiVersion: core.cozystack.io/v1alpha1
+kind: TenantModule
+metadata:
+  annotations:
+    meta.helm.sh/release-name: tenant-root
+    meta.helm.sh/release-namespace: tenant-root
+  labels:
+    apps.cozystack.io/application.group: apps.cozystack.io
+    apps.cozystack.io/application.kind: Ingress
+    apps.cozystack.io/application.name: ingress
+    sharding.fluxcd.io/key: tenants
+  name: ingress
+  namespace: tenant-root

@@ -1,0 +1,22 @@
+apiVersion: apps.cozystack.io/v1alpha1
+kind: NATS
+metadata:
+  name: test123
+  namespace: tenant-root
+spec:
+  config:
+    merge: {}
+    resolver: {}
+  external: false
+  jetstream:
+    enabled: true
+    size: 1Gi
+  replicas: 2
+  resources: {}
+  resourcesPreset: t1.nano
+  storageClass: local
+  users:
+    23sdf:
+      password: "123"
+    s:
+      password: s1
