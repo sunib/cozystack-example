@@ -1,0 +1,36 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  labels:
+    cozystack.io/package: cozystack.kafka-operator
+  name: kafka-operator
+  namespace: cozy-kafka-operator
+spec:
+  chartRef:
+    kind: ExternalArtifact
+    name: cozystack-kafka-operator-default-kafka-operator
+    namespace: cozy-system
+  dependsOn:
+  - name: cilium
+    namespace: cozy-cilium
+  - name: cilium-networkpolicy
+    namespace: cozy-cilium
+  - name: kubeovn
+    namespace: cozy-kubeovn
+  - name: prometheus-operator-crds
+    namespace: cozy-victoria-metrics-operator
+  install:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  interval: 5m0s
+  maxHistory: 5
+  upgrade:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  valuesFrom:
+  - kind: Secret
+    name: cozystack-values
