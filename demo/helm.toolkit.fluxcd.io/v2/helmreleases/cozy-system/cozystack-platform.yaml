@@ -1,0 +1,51 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  annotations:
+    cozyhr.cozystack.io/values-files: values.yaml,values-isp-full.yaml
+  labels:
+    cozystack.io/package: cozystack.cozystack-platform
+  name: cozystack-platform
+  namespace: cozy-system
+spec:
+  chartRef:
+    kind: ExternalArtifact
+    name: cozystack-cozystack-platform-isp-full-platform
+    namespace: cozy-system
+  install:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  interval: 5m0s
+  maxHistory: 5
+  upgrade:
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 30s
+    timeout: 10m0s
+  values:
+    authentication:
+      oidc:
+        enabled: true
+        insecureSkipVerify: false
+        keycloakInternalUrl: http://keycloak-http.cozy-keycloak.svc:8080/realms/cozy
+    bundles:
+      iaas:
+        enabled: false
+      naas:
+        enabled: false
+    networking:
+      joinCIDR: 100.64.0.0/16
+      podCIDR: 10.244.0.0/16
+      podGateway: 10.244.0.1
+      serviceCIDR: 10.96.0.0/16
+    publishing:
+      apiServerEndpoint: https://cozy.z65:6443
+      certificates:
+        issuerName: letsencrypt-prod
+        solver: dns01
+      exposedServices:
+      - dashboard
+      - api
+      host: cozy.z65.nl
