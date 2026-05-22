@@ -2,7 +2,7 @@ apiVersion: apps.cozystack.io/v1alpha1
 kind: NATS
 metadata:
   annotations:
-    simon: was here, and again
+    simon: was here, and again, again
   name: andmore3
   namespace: tenant-root
 spec:
