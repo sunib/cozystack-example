@@ -37,7 +37,7 @@ spec:
     priceCents: 250
     sku: coffee-filter
   qrUrl: /?voucher=free26
-  shopName: CozySummit Coffee
+  shopName: CozySummit Coffee1
   vouchers:
   - appliesToProducts:
     - coffee-flat-white
