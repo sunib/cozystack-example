@@ -1,0 +1,51 @@
+apiVersion: examples.configbutler.ai/v1alpha1
+kind: CoffeeConfig
+metadata:
+  name: app-config
+  namespace: voter-production
+spec:
+  bannerText: Scan the QR code for your free CozySummit coffee
+  currency: EUR
+  mail:
+    apiKeySecretRef:
+      key: api-key
+      name: coffee-mail
+    fromAddress: coffee@testnet.demo
+    orderConfirmationTemplate: free-order-confirmation-v1
+    provider: resend
+  payments:
+    apiKeySecretRef:
+      key: api-key
+      name: coffee-payments
+    mode: test
+    provider: stripe
+    zeroAmountCheckoutAllowed: true
+  products:
+  - description: Double shot with silky milk
+    enabled: true
+    name: Flat White
+    priceCents: 395
+    sku: coffee-flat-white
+  - description: Small, strong, and fast
+    enabled: true
+    name: Espresso
+    priceCents: 275
+    sku: coffee-espresso
+  - description: Batch brew for fast queues
+    enabled: true
+    name: Filter Coffee
+    priceCents: 250
+    sku: coffee-filter
+  qrUrl: /?voucher=free26
+  shopName: CozySummit Coffee
+  vouchers:
+  - appliesToProducts:
+    - coffee-flat-white
+    - coffee-espresso
+    - coffee-filter
+    code: testnet2026
+    discountType: percentage
+    discountValue: 100
+    displayMessage: TestNet visitors get free coffee
+    enabled: true
+    maximumUsage: 3
