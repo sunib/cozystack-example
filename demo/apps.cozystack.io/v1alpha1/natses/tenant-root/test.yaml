@@ -1,0 +1,18 @@
+apiVersion: apps.cozystack.io/v1alpha1
+kind: NATS
+metadata:
+  name: test
+  namespace: tenant-root
+spec:
+  config:
+    merge: {}
+    resolver: {}
+  external: false
+  jetstream:
+    enabled: true
+    size: 512Mi
+  replicas: 1
+  resources: {}
+  resourcesPreset: t1.nano
+  storageClass: local
+  users: {}
