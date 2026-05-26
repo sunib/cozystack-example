@@ -1,11 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cozystack-basics
-    meta.helm.sh/release-namespace: cozy-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     apps.cozystack.io/application.group: apps.cozystack.io
     apps.cozystack.io/application.kind: Tenant
     apps.cozystack.io/application.name: root
@@ -29,7 +25,8 @@ spec:
     host: ""
     ingress: true
     monitoring: true
-    resourceQuotas: {}
+    resourceQuotas:
+      something: cool
     schedulingClass: ""
     seaweedfs: false
   valuesFrom:
