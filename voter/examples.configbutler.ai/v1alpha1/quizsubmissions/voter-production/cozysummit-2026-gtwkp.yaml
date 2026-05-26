@@ -1,0 +1,24 @@
+apiVersion: examples.configbutler.ai/v1alpha1
+kind: QuizSubmission
+metadata:
+  name: cozysummit-2026-gtwkp
+  namespace: voter-production
+spec:
+  answers:
+  - number: 5
+    questionId: q3
+  - questionId: q1
+    singleChoice: "Yes"
+  - multiChoice:
+    - Traefik
+    - Terraform
+    questionId: q2
+  - number: 5
+    questionId: q4
+  - questionId: q5
+    singleChoice: fgjfgjgfhj
+  sessionRef:
+    group: examples.configbutler.ai
+    kind: QuizSession
+    name: cozysummit-2026
+  submittedAt: "2026-05-26T08:50:12.628Z"
