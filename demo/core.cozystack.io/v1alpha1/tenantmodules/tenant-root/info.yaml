@@ -14,4 +14,4 @@ metadata:
     helm.toolkit.fluxcd.io/namespace: tenant-root
     sharding.fluxcd.io/key: tenants
   name: info
-  namespace: tenant-root
+  namespace: tenant-root  
