@@ -8,6 +8,7 @@ spec:
   host: ""
   ingress: true
   monitoring: true
-  resourceQuotas: {}
+  resourceQuotas:
+    something: cool
   schedulingClass: ""
   seaweedfs: false
